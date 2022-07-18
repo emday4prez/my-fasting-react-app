@@ -3,8 +3,9 @@ import './App.css';
 import FastHistory from './components/FastHistory';
 import InputForm from './components/InputForm';
 
-function App(props) {
-const [history, setHistory] = useState(props.history)
+function App() {
+
+
 let fastingHistory = [
  {
   id:1,
@@ -19,10 +20,9 @@ let fastingHistory = [
   userName:"emday4prez"
  }
 ]
-
   return (
     <div className="App">
-      <InputForm/>
+      <InputForm fastingHistory={fastingHistory}/>
       <FastHistory fastingHistory={fastingHistory}/>
     </div>
   );

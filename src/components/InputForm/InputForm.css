@@ -1,4 +1,4 @@
-.inputForm{
+.inputComponent{
  display: flex;
  flex-direction: column;
  justify-content: center;
@@ -12,4 +12,25 @@
 }
 .hoursInput:focus{
  border: 2px dotted lightblue;
+}
+
+.saveBtn{
+ margin:1rem;
+ padding: 1rem;
+}
+
+.saveBtn button{
+  padding:1rem;
+ background-color: rgb(0, 145, 255);
+ outline: none;
+ border: none;
+ border-radius: .5rem;
+ color: whitesmoke;
+ font-size: 1rem;
+ font-weight: bold;
+ width: 150px;
+}
+
+.saveBtn button:focus{
+ outline: 2px dotted rgb(0, 145, 255);
 }
