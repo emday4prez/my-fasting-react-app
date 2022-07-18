@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import DatePicker from 'react-datepicker'
-import { format, compareAsc } from 'date-fns'
+import { format} from 'date-fns'
 import 'react-datepicker/dist/react-datepicker.css'
 import './InputForm.css'
 
@@ -21,7 +21,6 @@ function InputForm({myFasts, setMyFasts}) {
 
    
    setMyFasts(myFasts.concat(fastObject))
-   console.log('myFasts', myFasts)
    setSelectedDate(null)
    setTotalHours(0)
   }
@@ -40,7 +39,7 @@ function InputForm({myFasts, setMyFasts}) {
      </div>
      <div className="hoursContainer">
       <label htmlFor='hours'><h4>total hours</h4></label>
-     <input className='hoursInput' onChange={handleHourChange} aria-labelledby='input number of hours fasted' type="number" name="hours" id="hours" />
+     <input className='hoursInput' onChange={handleHourChange} aria-labelledby='input number of hours fasted' type="number" name="hours" id="hours" value={totalHours}/>
      </div>
      
      <div className="saveBtn">
