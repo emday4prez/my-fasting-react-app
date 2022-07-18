@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import FastStats from './components/FastStats';
 
 function App() {
+
+let fastingHistory = [
+ {
+  id:1,
+  endDate: "06/14/2022",
+  hours: 14,
+  userName:"emday4prez"
+ }, 
+ {
+  id:2,
+  endDate: "07/12/2022",
+  hours: 15,
+  userName:"emday4prez"
+ }
+]
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <FastStats fastingHistory={fastingHistory}/>
     </div>
   );
 }
