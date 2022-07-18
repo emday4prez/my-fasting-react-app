@@ -1,6 +1,6 @@
 import React from 'react'
-import './fastStats.css'
-function FastStats({fastingHistory}) {
+import './fastHistory.css'
+function FastHistory({fastingHistory}) {
   return (
    <div className="fast">
       <h2 className='historyTitle'>my fasting history</h2>
@@ -18,4 +18,4 @@ function FastStats({fastingHistory}) {
   )
 }
 
-export default FastStats
+export default FastHistory

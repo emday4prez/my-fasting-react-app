@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import './App.css';
-import FastStats from './components/FastStats';
+import FastHistory from './components/FastHistory';
+import InputForm from './components/InputForm';
 
-function App() {
-
+function App(props) {
+const [history, setHistory] = useState(props.history)
 let fastingHistory = [
  {
   id:1,
@@ -20,7 +22,8 @@ let fastingHistory = [
 
   return (
     <div className="App">
-      <FastStats fastingHistory={fastingHistory}/>
+      <InputForm/>
+      <FastHistory fastingHistory={fastingHistory}/>
     </div>
   );
 }
