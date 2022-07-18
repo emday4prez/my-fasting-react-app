@@ -5,8 +5,7 @@ import InputForm from './components/InputForm';
 
 function App() {
 
-
-let fastingHistory = [
+const [myFasts, setMyFasts] = useState([
  {
   id:1,
   endDate: "06/14/2022",
@@ -19,11 +18,12 @@ let fastingHistory = [
   hours: 15,
   userName:"emday4prez"
  }
-]
+])
+
   return (
     <div className="App">
-      <InputForm fastingHistory={fastingHistory}/>
-      <FastHistory fastingHistory={fastingHistory}/>
+      <InputForm myFasts={myFasts} setMyFasts={setMyFasts} />
+      <FastHistory  myFasts={myFasts}/>
     </div>
   );
 }

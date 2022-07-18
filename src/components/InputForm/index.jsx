@@ -1,15 +1,13 @@
 import React, { useState } from 'react'
 import DatePicker from 'react-datepicker'
+import { format, compareAsc } from 'date-fns'
 import 'react-datepicker/dist/react-datepicker.css'
 import './InputForm.css'
 
-function InputForm({fastingHistory}) {
+function InputForm({myFasts, setMyFasts}) {
   const [selectedDate, setSelectedDate] = useState(null)
   const [totalHours, setTotalHours] = useState(0)
-  const [newFast, setNewFast] = useState({
-   endDate: '01/01/2000',
-   hours: 14
-  })
+ 
 
   const handleHourChange = (e) => {
     e.preventDefault()
@@ -17,10 +15,13 @@ function InputForm({fastingHistory}) {
   }
 
   const handleSave = () => {
-   const fastObject = {endDate: selectedDate, hours: totalHours, id: fastingHistory.length+1}
+   const date = format(selectedDate, 'MM/dd/yyyy')
+   
+   const fastObject = {endDate: date, hours: totalHours, id: myFasts.length+1}
 
-   setNewFast(fastObject)
-   console.log('saved:', newFast)
+   
+   setMyFasts(myFasts.concat(fastObject))
+   console.log('myFasts', myFasts)
    setSelectedDate(null)
    setTotalHours(0)
   }
