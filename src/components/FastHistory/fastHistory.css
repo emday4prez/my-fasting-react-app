@@ -9,3 +9,28 @@
 .historyTitle{
    color: #61dafb;
 }
+
+.fast-wrap{
+   font-size: 1.25rem;
+   display:flex;
+   flex-direction: row;
+   text-align: left;
+   justify-content: space-between;
+  
+}
+
+.btnWrapper{
+
+}
+.fast-wrap button{
+   padding: .1rem;
+   margin: .25rem;
+  
+   
+}
+
+.historyContainer{
+   margin:.75rem;
+   border: 2px dotted lightblue;
+   
+}

@@ -34,8 +34,8 @@ function InputForm({ myFasts, setMyFasts }) {
 
         const fastObject = {
             id: Math.floor((Math.random() * 999) * 33333333),
-            startDate: startValue,
-            endDate: endValue,
+            startDate: startValue.toISOString(),
+            endDate: endValue.toISOString(),
             duration: getDuration(startValue, endValue),
             hours: hours,
             
