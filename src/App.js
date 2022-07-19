@@ -5,6 +5,7 @@ import InputForm from './components/InputForm'
 import subtractTimeFromDate from './utils/subtractTimeFromDate'
 
 function App() {
+    console.log('app render')
     const [myFasts, setMyFasts] = useState([
         {
             id: Math.floor(Math.random() * 1000000000),
@@ -18,6 +19,7 @@ function App() {
                 minutes: 0,
                 seconds: 0,
             },
+            hours: [1, 2, 3, 4, 5, 6,3,3,3,3,3,3, 7, 78],
         },
         {
             id: Math.floor(Math.random() * 1000000000),
@@ -32,6 +34,7 @@ function App() {
                 minutes: 0,
                 seconds: 0,
             },
+            hours: [1, 2, 3, 4, 5, 6, 7, 780,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
         },
     ])
 

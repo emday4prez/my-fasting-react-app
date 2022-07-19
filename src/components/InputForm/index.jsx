@@ -4,6 +4,7 @@ import subtractTimeFromDate from '../../utils/subtractTimeFromDate'
 import { getDuration } from '../../utils/getDuration'
 import 'react-datepicker/dist/react-datepicker.css'
 import './InputForm.css'
+import { eachHourOfInterval, isSameDay } from 'date-fns/esm'
 
 function InputForm({ myFasts, setMyFasts }) {
     const twentyHoursAgo = subtractTimeFromDate(new Date(), 20)
@@ -12,17 +13,37 @@ function InputForm({ myFasts, setMyFasts }) {
 
    
     const handleSave = () => {
+        
+        let existingDate = false;
+        myFasts.forEach(fast =>{
+            if(isSameDay(fast.endDate, endValue)){
+                console.log(fast.endDate)
+                existingDate = true
+            }
+        })
+        if (existingDate){
+            alert(`you have already recorded a fast for that date`)
+            return
+        }
+        const hours = eachHourOfInterval({
+            start: startValue,
+            end: endValue
+        })
+
         const fastObject = {
             id: Math.floor((Math.random() * 999) * 33333333),
             startDate: startValue,
             endDate: endValue,
             duration: getDuration(startValue, endValue),
+            hours: hours,
+            
             
         }
         const newHistory = [...myFasts, fastObject]
 
         setMyFasts(newHistory)
-        console.log('new history: ', newHistory)
+       
+        
     }
 
     return (
