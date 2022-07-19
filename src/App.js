@@ -1,42 +1,21 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import './App.css'
 import FastHistory from './components/FastHistory'
 import InputForm from './components/InputForm'
 import subtractTimeFromDate from './utils/subtractTimeFromDate'
 
 function App() {
-    console.log('app render')
-    const [myFasts, setMyFasts] = useState([
-        {
-            id: Math.floor(Math.random() * 1000000000),
-            startDate: subtractTimeFromDate(new Date(), 515),
-            endDate: subtractTimeFromDate(new Date(), 500),
-            duration: {
-                years: 0,
-                months: 0,
-                days: 0,
-                hours: 15,
-                minutes: 0,
-                seconds: 0,
-            },
-            hours: [1, 2, 3, 4, 5, 6,3,3,3,3,3,3, 7, 78],
-        },
-        {
-            id: Math.floor(Math.random() * 1000000000),
+    const [myFasts, setMyFasts] = useState([])
 
-            startDate: subtractTimeFromDate(new Date(), 5425),
-            endDate: subtractTimeFromDate(new Date(), 5400),
-            duration: {
-                years: 0,
-                months: 0,
-                days: 1,
-                hours: 1,
-                minutes: 0,
-                seconds: 0,
-            },
-            hours: [1, 2, 3, 4, 5, 6, 7, 780,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        },
-    ])
+    useEffect(() => {
+        console.log('effect')
+        axios.get('http://localhost:3001/myFasts').then((response) => {
+            console.log('promise fulfilled')
+            setMyFasts(response.data)
+        })
+    }, [])
+    console.log('render', myFasts.length, 'fasts')
 
     return (
         <div className="App">

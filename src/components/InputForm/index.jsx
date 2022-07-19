@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 import DateTimePicker from 'react-datetime-picker'
+import parseJSON from 'date-fns/parseJSON'
 import subtractTimeFromDate from '../../utils/subtractTimeFromDate'
 import { getDuration } from '../../utils/getDuration'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -16,7 +18,7 @@ function InputForm({ myFasts, setMyFasts }) {
         
         let existingDate = false;
         myFasts.forEach(fast =>{
-            if(isSameDay(fast.endDate, endValue)){
+            if(isSameDay(parseJSON(fast.endDate), endValue)){
                 console.log(fast.endDate)
                 existingDate = true
             }
@@ -39,9 +41,18 @@ function InputForm({ myFasts, setMyFasts }) {
             
             
         }
-        const newHistory = [...myFasts, fastObject]
 
-        setMyFasts(newHistory)
+        axios
+            .post('http://localhost:3001/myFasts', fastObject)
+            .then((response) => {
+                const newHistory = [...myFasts, fastObject]
+                setMyFasts(newHistory)
+                startOnChange(twentyHoursAgo)
+                endOnChange(new Date())
+            })
+
+        
+        
        
         
     }
