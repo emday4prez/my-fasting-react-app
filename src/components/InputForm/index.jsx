@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { update } from '../../services/myFasts'
 import DateTimePicker from 'react-datetime-picker'
 import parseJSON from 'date-fns/parseJSON'
 import subtractTimeFromDate from '../../utils/subtractTimeFromDate'
@@ -12,34 +13,64 @@ function InputForm({ myFasts, setMyFasts }) {
     const twentyHoursAgo = subtractTimeFromDate(new Date(), 20)
     const [startValue, startOnChange] = useState(twentyHoursAgo)
     const [endValue, endOnChange] = useState(new Date())
+    const [notification, setNotification] = useState(null)
 
-   
+    const notify = (message, type = 'info') => {
+        setNotification({ message, type })
+        setTimeout(() => {
+            setNotification(null)
+        }, 3001)
+    }
     const handleSave = () => {
-        
-        let existingDate = false;
-        myFasts.forEach(fast =>{
-            if(isSameDay(parseJSON(fast.endDate), endValue)){
-                console.log(fast.endDate)
-                existingDate = true
-            }
-        })
-        if (existingDate){
-            alert(`you have already recorded a fast for that date`)
-            return
-        }
         const hours = eachHourOfInterval({
             start: startValue,
-            end: endValue
+            end: endValue,
         })
-
         const fastObject = {
-            id: Math.floor((Math.random() * 999) * 33333333),
+            id: Math.floor(Math.random() * 999 * 33333333),
             startDate: startValue.toISOString(),
             endDate: endValue.toISOString(),
             duration: getDuration(startValue, endValue),
-            hours: hours,
-            
-            
+            hours: hours.length - 1,
+        }
+
+        let existingDate
+        myFasts.forEach((fast) => {
+            if (isSameDay(parseJSON(fast.endDate), endValue)) {
+                console.log(fast.endDate)
+                existingDate = fast
+            }
+        })
+        console.log('exitistingDate: ', existingDate)
+
+        if (existingDate) {
+            const ok = window.confirm(
+                `This day is already stored, would you like to overwrite the current information for this day?`
+            )
+            if (ok) {
+                update(existingDate.id, {
+                    ...existingDate,
+                    startDate: startValue,
+                    endDate: endValue,
+                    duration: getDuration(startValue, endValue),
+                    hours: hours.length - 1,
+                })
+                    .then((savedFast) => {
+                        console.log('savedFast:', savedFast)
+                        notify(`updated info of ${savedFast.endDate}`)
+                    })
+                    .catch((error) => {
+                        console.error('error updating', error)
+                        notify(
+                            `the ${existingDate.endDate} had already been removed`,
+                            'alert'
+                        )
+                        setMyFasts(
+                            myFasts.filter((p) => p.id !== existingDate.id)
+                        )
+                    })
+                return
+            }
         }
 
         axios
@@ -50,11 +81,7 @@ function InputForm({ myFasts, setMyFasts }) {
                 startOnChange(twentyHoursAgo)
                 endOnChange(new Date())
             })
-
-        
-        
-       
-        
+            .catch((e) => console.error(e))
     }
 
     return (

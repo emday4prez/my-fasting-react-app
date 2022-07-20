@@ -19,7 +19,7 @@ function FastHistory({ myFasts, setMyFasts }) {
                             {`${parseISO(fast.endDate)
                                 .toString()
                                 .slice(0, 16)} - ${
-                                fast.hours.length - 1
+                                fast.hours
                             } hours`}
                             <div className="btnWrapper">
                                 <button onClick={() => handleDelete(fast.id)}>delete</button>
