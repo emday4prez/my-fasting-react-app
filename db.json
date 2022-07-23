@@ -139,6 +139,20 @@
         "seconds": 0
       },
       "hours": 17
+    },
+    {
+      "id": 22742282996,
+      "startDate": "2022-07-23T00:00:00.000Z",
+      "endDate": "2022-07-23T17:28:48.028Z",
+      "duration": {
+        "years": 0,
+        "months": 0,
+        "days": 0,
+        "hours": 17,
+        "minutes": 28,
+        "seconds": 48
+      },
+      "hours": 17
     }
   ]
 }

@@ -78,6 +78,7 @@ function InputForm({ myFasts, setMyFasts }) {
             .then((response) => {
                 const newHistory = [...myFasts, fastObject]
                 setMyFasts(newHistory)
+                notify('added to list')
                 startOnChange(twentyHoursAgo)
                 endOnChange(new Date())
             })
