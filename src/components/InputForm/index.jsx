@@ -74,7 +74,7 @@ function InputForm({ myFasts, setMyFasts }) {
         }
 
         axios
-            .post('http://localhost:3001/myFasts', fastObject)
+            .post('http://localhost:3001/api/history', fastObject)
             .then((response) => {
                 const newHistory = [...myFasts, fastObject]
                 setMyFasts(newHistory)
