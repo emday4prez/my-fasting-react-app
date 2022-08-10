@@ -1,6 +1,7 @@
 # My Fasting React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a practice front end for an application to keep track of intermittent fasting.
 
 ## Available Scripts
 
